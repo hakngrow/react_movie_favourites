@@ -44,7 +44,7 @@ The OMDb API returns a list of JSON objects, each for a movie matching the searc
 ```
 Once we are able to query the OMDb, we can proceed to the layout of our movie app.
 
-### Wireframing the Movie app
+### Wireframing the Movie app UI
 ![Layout design of the movie app](/public/images/wireframe.jpg)
 
 The layout of the favourites movie app consists of 3 sections.
@@ -53,4 +53,10 @@ The layout of the favourites movie app consists of 3 sections.
 3. A section to display the movies selected as favourites. Each movie in this section is represented by a movie poster with an overlaid button to remove the movie from the favourites list.
 
 ### Custom React components
+The custom components are in the `/src/components` directory.
 
+- `MovieListHeading.js` : Renders a heading above a movie list.
+- `MovieList.js` : Renders a list of movie posters based on the JSON results returned from OMDb. Accepts a favourites component that renders as a overlaid button on each movie poster, and the callback handler when the button is clicked.
+- `SearchBox.js` : Renders a text input that user enters the search value.  
+- `Add Favourites.js` : Renders an overlay button, when clicked, adds a movie to the favourites list.
+- `Remove Favourites.js` :  Renders an overlay button, when clicked, removes a movie from the favourites list.
