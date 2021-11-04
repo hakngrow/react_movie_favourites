@@ -44,7 +44,12 @@ The OMDb API returns a list of JSON objects, each for a movie matching the searc
 ```
 Once we are able to query the OMDb, we can proceed to the layout of our movie app.
 
-### Wireframing the web application
+### Wireframing the Movie app
 ![Layout design of the movie app](/public/images/wireframe.jpg)
+
+The layout of the favourites movie app consists of 3 parts.
+1. A text input to enter the query to search movies on the OMDb.
+2. A search result section to display the list of movies returned from the OMDb.
+3. A section to display the movies selected as favourites. 
 
 
