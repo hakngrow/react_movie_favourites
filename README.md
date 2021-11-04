@@ -81,4 +81,34 @@ The custom components are in the `/src/components` directory.
 		getMovieRequest(searchValue);
 	}, [searchValue]);
 ```
-3. When the browser refreshes, we want to load the list of favourites movies previously selected.
+
+We query the OMDb using the new `searchValue` using the `getMovieRequest` function and update the `movies` state variable.
+```
+	// Query the Open Movie DB based on search value
+	const getMovieRequest = async (searchValue) => {
+		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9b5b9d51`;
+
+		const response = await fetch(url);
+		const responseJson = await response.json();
+
+		if (responseJson.Search) {
+			setMovies(responseJson.Search);
+		}
+	};
+```
+
+
+2. When the browser refreshes, we want to load the list of favourites movies previously selected (which are stored in the browser's local storage).
+```
+ 	// Retreives the list of favourite movies stored in the browser local storage.
+	// Runs only once when App component mounts (i.e. empty dependency array).
+	useEffect(() => {
+		const movieFavourites = JSON.parse(
+			localStorage.getItem('react-movie-app-favourites')
+		);
+
+		if (movieFavourites) {
+			setFavourites(movieFavourites);
+		}
+	}, []);
+```
