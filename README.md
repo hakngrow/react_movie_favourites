@@ -42,9 +42,9 @@ The OMDb API returns a list of JSON objects, each for a movie matching the searc
     "Response": "True"
 }
 ```
+Once we are able to query the OMDb, we can proceed to the layout of our movie app.
 
-Once we are able to query the OMDb, we can proceed to the layout design of our movie app.
-
+### Wireframing the web application
 ![Layout design of the movie app](/public/images/wireframe.jpg)
 
 
