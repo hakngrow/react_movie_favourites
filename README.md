@@ -61,4 +61,24 @@ The custom components are in the `/src/components` directory.
 - `Add Favourites.js` : Renders an overlay button, when clicked, adds a movie to the favourites list.
 - `Remove Favourites.js` :  Renders an overlay button, when clicked, removes a movie from the favourites list.
 
+### State Management using `useState`
+```
+	// Listing of movies from search
+	const [movies, setMovies] = useState([]);
 
+	// Listing of movies selected as favourites
+	const [favourites, setFavourites] = useState([]);
+
+	// Value of movie search input
+	const [searchValue, setSearchValue] = useState('');
+```
+
+### Side Effects using `useEffect`
+1. When the search input changes, we want to query the OMDb with the new search parameter and load the new list of movies.
+```
+	// Get a new movie listing when the search value state variable changes
+	useEffect(() => {
+		getMovieRequest(searchValue);
+	}, [searchValue]);
+```
+3. When the browser refreshes, we want to load the list of favourites movies previously selected.
