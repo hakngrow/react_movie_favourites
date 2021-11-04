@@ -9,6 +9,7 @@
 We will use the OMDb API, a RESTful web service, to obtain movie information and images.  
 
 Apply for the free [API key](http://www.omdbapi.com/apikey.aspx), and check your registered email to verify your account and obtain your API key.
+![Apply for free API key](/public/images/apikey.jpg)
 
 We can query the OMDb using the GET request format `http://www.omdbapi.com/?apikey=[yourkey]&` followed by [parameters](http://www.omdbapi.com/#parameters) to refine the search.  The GET request below queries the OMDb for movies with titles that match `star wars a new hope` 
 ```
