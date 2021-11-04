@@ -12,7 +12,7 @@ Apply for the free [API key](http://www.omdbapi.com/apikey.aspx), and check your
 
 ![Apply for free API key](/public/images/apikey.jpg)
 
-We can query the OMDb using the GET request format `http://www.omdbapi.com/?apikey=[yourkey]&` followed by [parameters](http://www.omdbapi.com/#parameters) to refine the search.  The GET request below queries the OMDb for movies with titles that match `star wars`.  Try it out in a browser or using a developer tool like [Postman](https://www.postman.com/).
+We can query the OMDb using the GET request format `http://www.omdbapi.com/?apikey=[yourkey]&` followed by [parameters](http://www.omdbapi.com/#parameters) to refine the search.  In this project, we will use the `s` parameter, which queries the OMDb using movie titles. The GET request below queries the OMDb for movies with titles that match `star wars`.  Try it out in a browser or using a developer tool like [Postman](https://www.postman.com/).
 ```
 http://www.omdbapi.com/?apikey=9b5b9d51&s=star+wars
 ```
@@ -47,7 +47,7 @@ Once we are able to query the OMDb, we can proceed to the layout of our movie ap
 ### Wireframing the Movie app
 ![Layout design of the movie app](/public/images/wireframe.jpg)
 
-The layout of the favourites movie app consists of 3 parts.
+The layout of the favourites movie app consists of 3 sections.
 1. A text input to enter the query to search movies on the OMDb.
 2. A search result section to display the list of movies returned from the OMDb.
 3. A section to display the movies selected as favourites. 
