@@ -23,7 +23,7 @@ const App = () => {
 
 	// Query the Open Movie DB based on search value
 	const getMovieRequest = async (searchValue) => {
-		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9b5b9d51`;
+		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=[yourkey]`;
 
 		const response = await fetch(url);
 		const responseJson = await response.json();
