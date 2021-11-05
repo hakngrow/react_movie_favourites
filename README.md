@@ -145,5 +145,7 @@ We query the OMDb with the new `searchValue` using the `getMovieRequest` functio
 ```
 
 ### Setup & run
+
 `npm install` dependencies
+
 `npm start`
