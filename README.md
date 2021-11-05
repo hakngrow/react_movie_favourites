@@ -59,13 +59,36 @@ The custom components are in the `/src/components` directory.
 - `MovieList.js` : Renders a list of movie posters based on the JSON results returned from OMDb. Accepts 2 properties, a favourites component that renders as an overlaid button on each movie poster, and the callback handler when the button is clicked.
 - `SearchBox.js` : Renders a text input that user enters the search value.  
 - `Add Favourites.js` : Renders an overlay button, when clicked, adds a movie to the favourites list. The new list is saved on the browser's local storage.
-- `Remove Favourites.js` :  Renders an overlay button, when clicked, removes a movie from the favourites list.
+- `RemoveFavourites.js` :  Renders an overlay button, when clicked, removes a movie from the favourites list.
 - `App.js` : Does the heavy lifting in terms of state management, side effects and callback handling.
 
+The `AddFavourites` component, together with it's callback function `addFavouriteMovie` is passed as properties to the search results `MovieList` component.  Clicking the `AddFavourites` component, invokes the callback function that adds the selected movie to the favourites list, and updates the state variable `favourites` with the new list.
+```
+	// Adds a new movie to favourites list in state and browser local storage
+	const addFavouriteMovie = (movie) => {
+		const newFavouriteList = [...favourites, movie];
+		setFavourites(newFavouriteList);
+		saveToLocalStorage(newFavouriteList);
+	};
+```
+To persist the favourites list across refreshes, the callback function saves the list to the browser's local storage.
 ```
 	// Save list of favourite movies in browser local storage
 	const saveToLocalStorage = (items) => {
 		localStorage.setItem('react-movie-app-favourites', JSON.stringify(items));
+	};
+```
+
+The `RemoveFavourites` component, together with it's callback function `removeFavouriteMovie` is passed as properties to the favourites `MovieList` component.  Clicking the `RemoveFavourites` component, invokes the callback function that removes the selected movie from the favourites list, updates the state variable `favourites` and saves the new list to the browser's local storage.
+```
+	// Remove a movie from favourites list in state and browser local storage
+	const removeFavouriteMovie = (movie) => {
+		const newFavouriteList = favourites.filter(
+			(favourite) => favourite.imdbID !== movie.imdbID
+		);
+
+		setFavourites(newFavouriteList);
+		saveToLocalStorage(newFavouriteList);
 	};
 ```
 
