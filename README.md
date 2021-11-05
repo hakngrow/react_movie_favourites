@@ -14,7 +14,7 @@ Apply for the free [API key](http://www.omdbapi.com/apikey.aspx), and check your
 
 We can query the OMDb using the GET request format `http://www.omdbapi.com/?apikey=[yourkey]&` followed by [parameters](http://www.omdbapi.com/#parameters) to refine the search.  In this project, we will use the `s` parameter, which queries the OMDb using movie titles. The GET request below queries the OMDb for movies with titles that match `star wars`.  Try it out in a browser or using a developer tool like [Postman](https://www.postman.com/).
 ```
-http://www.omdbapi.com/?apikey=9b5b9d51&s=star+wars
+http://www.omdbapi.com/?apikey=[yourkey]&s=star+wars
 ```
 
 The OMDb API returns a list of JSON objects, each for a movie matching the search parameters.
@@ -56,10 +56,18 @@ The layout of the favourites movie app consists of 3 sections.
 The custom components are in the `/src/components` directory.
 
 - `MovieListHeading.js` : Renders a heading above a movie list.
-- `MovieList.js` : Renders a list of movie posters based on the JSON results returned from OMDb. Accepts a favourites component that renders as a overlaid button on each movie poster, and the callback handler when the button is clicked.
+- `MovieList.js` : Renders a list of movie posters based on the JSON results returned from OMDb. Accepts 2 properties, a favourites component that renders as an overlaid button on each movie poster, and the callback handler when the button is clicked.
 - `SearchBox.js` : Renders a text input that user enters the search value.  
-- `Add Favourites.js` : Renders an overlay button, when clicked, adds a movie to the favourites list.
+- `Add Favourites.js` : Renders an overlay button, when clicked, adds a movie to the favourites list. The new list is saved on the browser's local storage.
 - `Remove Favourites.js` :  Renders an overlay button, when clicked, removes a movie from the favourites list.
+- `App.js` : Does the heavy lifting in terms of state management, side effects and callback handling.
+
+```
+	// Save list of favourite movies in browser local storage
+	const saveToLocalStorage = (items) => {
+		localStorage.setItem('react-movie-app-favourites', JSON.stringify(items));
+	};
+```
 
 ### State Management using `useState`
 ```
@@ -74,7 +82,7 @@ The custom components are in the `/src/components` directory.
 ```
 
 ### Side Effects using `useEffect`
-1. When the search input changes, we want to query the OMDb with the new search parameter and load the new list of movies.
+1. When the search input changes, we want to query the OMDb with the new search parameter and load the new list of movies.  The movie list changes according to the return results from the `searchValue`, hence we include the state variable `searchValue` in the dependency array.
 ```
 	// Get a new movie listing when the search value state variable changes
 	useEffect(() => {
@@ -82,11 +90,11 @@ The custom components are in the `/src/components` directory.
 	}, [searchValue]);
 ```
 
-We query the OMDb using the new `searchValue` using the `getMovieRequest` function and update the `movies` state variable.
+We query the OMDb with the new `searchValue` using the `getMovieRequest` function and update the `movies` state variable with the returned JSON.
 ```
 	// Query the Open Movie DB based on search value
 	const getMovieRequest = async (searchValue) => {
-		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9b5b9d51`;
+		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=[yourkey]`;
 
 		const response = await fetch(url);
 		const responseJson = await response.json();
@@ -98,7 +106,7 @@ We query the OMDb using the new `searchValue` using the `getMovieRequest` functi
 ```
 
 
-2. When the browser refreshes, we want to load the list of favourites movies previously selected (which are stored in the browser's local storage).
+2. When the browser refreshes, we want to load the list of favourites movies previously selected (which are stored in the browser's local storage).  This is only done once when the main `App` component mounts, hence the empty dependency array. 
 ```
  	// Retreives the list of favourite movies stored in the browser local storage.
 	// Runs only once when App component mounts (i.e. empty dependency array).
